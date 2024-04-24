@@ -20,10 +20,10 @@
 <!--					<form th:action="saveStudent" th:object="${student}" method="POST">-->
 					<form th:action="saveStudent" th:object="${student}" method="POST" enctype="multipart/form-data">
 
-						<div class="form-group">
-							<label>Student Photo</label>
-							<input type="file" class="form-control" id="imageFile" name="imageFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload" required>
-						</div>
+<!--						<div class="form-group">-->
+<!--							<label>Student Photo</label>-->
+<!--							<input type="file" class="form-control" id="imageFile" name="imageFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload" required>-->
+<!--						</div>-->
 
 						<div class="form-group">
 							<label>Student ID</label>
@@ -59,6 +59,33 @@
 							<input class="form-control" type="text" name="teacherId" th:field="*{teacherId}"
 								   placeholder="Enter Teacher ID" />
 						</div>
+
+						<div class=" form-group">
+							<label>Date Of Birth</label>
+							<input class="form-control" type="text" name="dateofbirth" th:field="*{dateofbirth}"
+								   placeholder="Enter Date Of Birth" />
+						</div>
+
+						<div class=" form-group">
+							<label>Mobileno</label>
+							<input class="form-control" type="text" name="Mobileno" th:field="*{Mobileno}"
+								   placeholder="Enter Mobile no" />
+						</div>
+
+
+
+						<div class=" form-group">
+							<label>Enter Department</label>
+							<input class="form-control" type="text" name="Department" th:field="*{Department}"
+								   placeholder="Enter Department" />
+						</div>
+
+						<div class=" form-group">
+							<label>Enter Regulation</label>
+							<input class="form-control" type="text" name="Regulation" th:field="*{Regulation}"
+								   placeholder="Enter Regulation" />
+						</div>
+
 						<br>
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Create</button>

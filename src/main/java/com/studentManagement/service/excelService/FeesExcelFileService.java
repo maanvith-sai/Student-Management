@@ -9,8 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public interface FeesExcelFileService {
-
+public interface FeesExcelFileService
+{
     List<Fees> processExcelFile(MultipartFile file) throws IOException;
-
 }

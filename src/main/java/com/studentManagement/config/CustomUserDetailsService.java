@@ -16,8 +16,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private UserRepo userRepo;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
+	{
 		User user = userRepo.findByUserId(username.toUpperCase());
 		System.out.println(user);
 		if (user == null) {

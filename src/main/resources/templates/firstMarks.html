@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user_base :: layout(~{::section})">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <title>Students Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -14,28 +13,75 @@
     </div>
     <br>
     <div>
-        <table class="table table-success table-striped table-hover">
-
+        <table class="table table-success table-striped table-hover" id="resultTable">
+            <thead>
             <tr>
                 <th scope="col">Subject Name</th>
                 <th scope="col">Internals</th>
                 <th scope="col">Externals</th>
+                <th style="col">Total</th>
+                <th style="col">Grade</th>
                 <th scope="col">Regulation</th>
                 <th scope="col">Attendance</th>
             </tr>
-            <th:block th:each="result : ${first}">
-                <tr>
-                    <tr th:block th:each="f : ${result.first}">
-                        <td><span th:text="${f.subjectName}"></span></td>
-                        <td><span th:text="${f.internals}"></span></td>
-                        <td><span th:text="${f.externals}"></span></td>
-                        <td><span th:text="${f.regulation}"></span></td>
-                        <td><span th:text="${f.attendance}"></span></td>
-                    </trth:block>
-                </tr>
-            </th:block>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td><span th:text="${student.subjectName}"></span></td>
+                <td><span th:text="${student.internals}"></span></td>
+                <td><span th:text="${student.externals}"></span></td>
+                <td></td> <!-- Placeholder for total, to be filled by JavaScript -->
+                <td></td>
+                <td><span th:text="${student.regulation}"></span></td>
+                <td><span th:text="${student.attendance}"></span></td>
+            </tr>
+            </tbody>
         </table>
     </div>
+    <script>
+        // Example JavaScript - You can customize this based on your requirements
+        document.addEventListener('DOMContentLoaded', function () {
+            var table = document.getElementById('resultTable');
+            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var internals = parseInt(rows[i].getElementsByTagName('td')[1].innerText);
+                var externals = parseInt(rows[i].getElementsByTagName('td')[2].innerText);
+                var total = internals + externals;
+
+                var totalCell = rows[i].getElementsByTagName('td')[3];
+                totalCell.innerText = total;
+
+                var gradeCell = rows[i].getElementsByTagName('td')[4];
+                var grade = calculateGrade(total);
+                gradeCell.innerText = grade;
+
+                if (grade === 'F') {
+                    rows[i].classList.add('grade-f');
+                }
+            }
+
+            function calculateGrade(total) {
+                if (total >= 90) {
+                    return 'S';
+                } else if (total >= 80) {
+                    return 'A';
+                } else if (total >= 70) {
+                    return 'B';
+                } else if (total >= 60) {
+                    return 'C';
+                } else if (total >= 50) {
+                    return 'D';
+                } else if (total >= 35) {
+                    return 'E';
+                } else {
+                    return 'F';
+                }
+            }
+
+            console.log('Page loaded');
+        });
+    </script>
 </section>
 
 </body>

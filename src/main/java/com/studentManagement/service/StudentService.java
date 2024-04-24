@@ -2,6 +2,7 @@ package com.studentManagement.service;
 
 
 import com.studentManagement.entity.Student;
+import com.studentManagement.entity.semester.*;
 
 import java.util.List;
 
@@ -19,4 +20,16 @@ public interface StudentService {
 
 
 	void deleteStudent(String studentId);
+
+	List<first> getFirstSemester();
+	List<second> getSecondSemester();
+	List<third> getThirdSemester();
+	List<fourth> getFourthSemester();
+	List<fifth> getFifthSemester();
+	List<sixth> getSixthSemester();
+	List<seventh> getSeventhSemester();
+	List<eighth> getEighthSemester();
+
+	List<Fees> getFees();
+
 }

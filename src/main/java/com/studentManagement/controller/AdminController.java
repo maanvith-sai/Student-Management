@@ -14,6 +14,7 @@ import com.studentManagement.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,7 +101,8 @@ public class AdminController
 		User u = userService.saveUser(user);
 		String userId = user.getUserId();
 
-		if (u != null) {
+		if (u != null)
+		{
 			session.setAttribute("msg", "Register successfully");
 		} else {
 			session.setAttribute("msg", "Something wrong server");
@@ -126,7 +128,7 @@ public class AdminController
 
 	//	save teacher
 	@PostMapping("/saveTeacher")
-	public String saveTeacher(@ModelAttribute("teacher") Teacher teacher,@RequestParam("imageFile") MultipartFile imageFile, Model m, Principal principal)
+	public String saveTeacher(HttpServletRequest request,@ModelAttribute("teacher") Teacher teacher,Model m, Principal principal)
 	{
 		User use1 = new User();
 		use1.setUserId(teacher.getTeacherId().toUpperCase());
@@ -135,16 +137,16 @@ public class AdminController
 		use1.setPassword(new BCryptPasswordEncoder().encode(teacher.getPassword()));
 		userRepo.save(use1);
 		Teacher teach1=new Teacher();
-		if (!imageFile.isEmpty()) {
-			byte[] imageBytes = new byte[0];
-			try {
-				imageBytes = imageFile.getBytes();
-				Blob blob = new javax.sql.rowset.serial.SerialBlob(imageBytes);
-				teach1.setImage(blob);
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
+//		if (!imageFile.isEmpty()) {
+//			byte[] imageBytes = new byte[0];
+//			try {
+//				imageBytes = imageFile.getBytes();
+//				Blob blob = new javax.sql.rowset.serial.SerialBlob(imageBytes);
+//				teach1.setImage(blob);
+//			} catch (Exception e) {
+//				throw new RuntimeException(e);
+//			}
+//		}
 		teach1.setName(teacher.getName());
 		teach1.setEmail(teacher.getEmail());
 		teach1.setTeacherId(teacher.getTeacherId());
@@ -156,8 +158,7 @@ public class AdminController
 	//save student
 	@PostMapping("/saveStudent")
 	public String saveStudent(HttpServletRequest request, @ModelAttribute("student") Student student,
-							  @RequestParam("imageFile") MultipartFile imageFile,
-							  Model m, Principal principal)throws IOException, SerialException, SQLException
+							  Model m, Principal principal)throws IOException,DataIntegrityViolationException
 	{
 		User use1 = new User();
 		use1.setUserId(student.getId().toUpperCase());
@@ -168,12 +169,14 @@ public class AdminController
 		use1.setPassword(new BCryptPasswordEncoder().encode(student.getPassword()));
 		userRepo.save(use1);
 		Student std=new Student();
-		try{
-			if (!imageFile.isEmpty()) {
-				byte[] imageBytes = imageFile.getBytes();
-				Blob blob = new javax.sql.rowset.serial.SerialBlob(imageBytes);
-				std.setImage(blob);
-			}
+		try
+		{
+//			if (!imageFile.isEmpty())
+//			{
+//				byte[] imageBytes = imageFile.getBytes();
+//				Blob blob = new javax.sql.rowset.serial.SerialBlob(imageBytes);
+//				std.setImage(blob);
+//			}
 			std.setId(student.getId());
 			std.setFirstName(student.getFirstName());
 			std.setLastName(student.getLastName());
@@ -183,8 +186,13 @@ public class AdminController
 			studentRepository.save(std);
 			return listStudents(m,principal);
 		}
-		catch(Exception e){
-			System.out.println(e);
+		catch(DataIntegrityViolationException e)
+		{
+			throw new IOException("Invalid one"+e.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
 			return "errorr";
 		}
 	}
@@ -193,7 +201,8 @@ public class AdminController
 	//==========================================================================================================================================
 
 	@GetMapping("/students/edit/{id}")
-	public String editStudent(@PathVariable String id, Model model) {
+	public String editStudent(@PathVariable String id, Model model)
+	{
 		Student existingStudent = studentService.getStudentById(id);
 		model.addAttribute("student", existingStudent);
 		return "edit_student";
@@ -213,22 +222,21 @@ public class AdminController
 	@PostMapping("/students/{id}")
 	public String updateStudent(@PathVariable String id,
 								@ModelAttribute("student") Student student,
-								Model model) throws SQLException, IOException {
+								Model model) throws SQLException, IOException
+	{
 		// Get Student details from database
 		Student existingStudent = studentService.getStudentById(id);
 		existingStudent.setId(student.getId());
 		existingStudent.setFirstName(student.getFirstName());
 		existingStudent.setLastName(student.getLastName());
 		existingStudent.setEmail(student.getEmail());
-		existingStudent.setId(student.getId());
+		existingStudent.setMobileno(String.valueOf(student.getMobileno()));
+		existingStudent.setDateofbirth(student.getDateofbirth());
 		existingStudent.setTeacherId(student.getTeacherId());
-
 		// save updated student object
 		studentService.updateStudent(existingStudent);
-
 		return "redirect:/admin/studentsList";
 	}
-
 	//	update teacher by ID
 	@PostMapping("/teachers/{id}")
 	public String updateStudent(@PathVariable String id,
@@ -251,7 +259,8 @@ public class AdminController
 	//========================================================================================================================================
 
 	@GetMapping("/teachers/{id}")
-	public String deleteTeacher(@PathVariable String id) {
+	public String deleteTeacher(@PathVariable String id)
+	{
 		teacherService.deleteTeacher(id);
 		userService.deleteByUserId(id);
 		return "redirect:/admin/teachersList";
