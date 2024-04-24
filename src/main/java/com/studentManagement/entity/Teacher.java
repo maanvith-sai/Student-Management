@@ -1,6 +1,8 @@
 package com.studentManagement.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
@@ -16,19 +18,22 @@ public class Teacher {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Lob
-    @Column(name="image", nullable = false)
-    private Blob image;
+//    @Lob
+//    @Column(name="image", nullable = false)
+//    private Blob image;
 
 
     @Column(name = "email", unique = true)
+    @Email(message = "Email should be valid and end with @gmail.com")
     private String email;
 
     @Id
     @Column(name="teacher_id",unique=true)
+    @NotNull
     private String teacherId;
 
     @Column(name="class_id",unique=true)
+    @NotNull
     private String classId;
 
 
@@ -38,10 +43,9 @@ public class Teacher {
 
     }
 
-    public Teacher(String name, Blob image ,String email, String teacherId, String classId,String password) {
+    public Teacher(String name,String email, String teacherId, String classId,String password) {
         super();
         this.name = name;
-        this.image = image;
         this.email = email;
         this.teacherId = teacherId;
         this.classId = classId;
@@ -86,12 +90,12 @@ public class Teacher {
         this.classId = classId;
     }
 
-    public Blob getImage() {
-        return image;
-    }
-
-    public void setImage(Blob image) {
-        this.image = image;
-    }
+//    public Blob getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(Blob image) {
+//        this.image = image;
+//    }
 }
 

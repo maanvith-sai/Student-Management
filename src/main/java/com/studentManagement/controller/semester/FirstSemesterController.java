@@ -40,7 +40,8 @@ public class FirstSemesterController
             List<first> entities = excelFileService.processExcelFile(file);
             model.addAttribute("entities", entities);
             model.addAttribute("message", "File uploaded and data saved successfully!");
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             e.printStackTrace();
             model.addAttribute("error", "Error processing the file.");
@@ -49,7 +50,8 @@ public class FirstSemesterController
     }
 
 //    @GetMapping("/all")
-    public String method1(Model model) {
+    public String method1(Model model)
+    {
         List<Student> results = repo.findAllUsersWithAddressfirst();
         model.addAttribute("first", results);
         return "firstMarks";

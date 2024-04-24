@@ -19,53 +19,168 @@
 					Update Student
 				</h1>
 				<div class="card-body">
-					<form th:action="@{/admin/students/{id} (id=${student.id})}" th:object="${student}" method="POST">
-
-						<div class=" form-group">
+					<form th:action="@{/admin/students/{id}(id=${student.id})}" th:object="${student}" method="POST">
+						<div class="form-group">
 							<label>Student Id</label>
 							<input class="form-control" type="text" name="studentId" th:field="*{id}"
 								   placeholder="Enter Student Id" readonly/>
 						</div>
 
-<!--						<div class="form-group">-->
-<!--							<label>Student Photo</label>-->
-<!--&lt;!&ndash;							<input type="file" class="form-control" id="imageFile" name="imageFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload">&ndash;&gt;-->
-<!--							<input type="file" class="form-control" id="imageFile" name="imageFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload" th:if="${file != null}" th:value="${file}"/>-->
-
-<!--						</div>-->
-
 						<div class="form-group">
 							<label>First Name</label>
 							<input class="form-control" type="text" name="firstName" th:field="*{firstName}"
-								placeholder="Enter First Name" />
+								   placeholder="Enter First Name" />
 						</div>
 
-						<div class=" form-group">
+						<div class="form-group">
 							<label>Last Name</label>
 							<input class="form-control" type="text" name="lastName" th:field="*{lastName}"
-								placeholder="Enter Last Name" />
+								   placeholder="Enter Last Name" />
 						</div>
 
-						<div class=" form-group">
+						<div class="form-group">
 							<label>Email</label>
 							<input class="form-control" type="email" name="email" th:field="*{email}"
-								placeholder="Enter email" />
+								   placeholder="Enter email" readonly/>
 						</div>
+
 						<div class="form-group">
 							<label>Teacher ID</label>
 							<input class="form-control" type="text" name="teacherId" th:field="*{teacherId}"
 								   placeholder="Enter Teacher ID" />
 						</div>
-						<br>
+
+						<div class="form-group">
+							<label>Date Of Birth</label>
+							<input class="form-control" type="text" name="dateofbirth" th:field="*{dateofbirth}"
+								   placeholder="Enter Date Of Birth" />
+						</div>
+
+						<div class="form-group">
+							<label>Mobile No</label>
+							<input class="form-control" type="text" name="Mobileno" th:field="*{Mobileno}"
+								   placeholder="Enter Mobile no" />
+						</div>
+
+						<div class="form-group">
+							<label>Enter Department</label>
+							<input class="form-control" type="text" name="Department" th:field="*{Department}"
+								   placeholder="Enter Department" readonly/>
+						</div>
+
+						<div class="form-group">
+							<label>Enter Regulation</label>
+							<input class="form-control" type="text" name="Regulation" th:field="*{Regulation}"
+								   placeholder="Enter Regulation" readonly/>
+						</div>
+
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Update</button>
 						</div>
-
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--					<form th:action="@{/admin/students/{id} (id=${student.id})}" th:object="${student}" method="POST">-->
+
+<!--						<div class=" form-group">-->
+<!--							<label>Student Id</label>-->
+<!--							<input class="form-control" type="text" name="studentId" th:field="*{id}"-->
+<!--								   placeholder="Enter Student Id" readonly/>-->
+<!--						</div>-->
+
+<!--&lt;!&ndash;						<div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;							<label>Student Photo</label>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;							<input type="file" class="form-control" id="imageFile" name="imageFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;							<input type="file" class="form-control" id="imageFile" name="imageFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload" th:if="${file != null}" th:value="${file}"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;						</div>&ndash;&gt;-->
+
+<!--						<div class="form-group">-->
+<!--							<label>First Name</label>-->
+<!--							<input class="form-control" type="text" name="firstName" th:field="*{firstName}"-->
+<!--								placeholder="Enter First Name" />-->
+<!--						</div>-->
+
+<!--						<div class=" form-group">-->
+<!--							<label>Last Name</label>-->
+<!--							<input class="form-control" type="text" name="lastName" th:field="*{lastName}"-->
+<!--								placeholder="Enter Last Name" />-->
+<!--						</div>-->
+
+<!--						<div class=" form-group">-->
+<!--							<label>Email</label>-->
+<!--							<input class="form-control" type="email" name="email" th:field="*{email}"-->
+<!--								placeholder="Enter email" />-->
+<!--						</div>-->
+<!--						<div class="form-group">-->
+<!--							<label>Teacher ID</label>-->
+<!--							<input class="form-control" type="text" name="teacherId" th:field="*{teacherId}"-->
+<!--								   placeholder="Enter Teacher ID" />-->
+<!--						</div>-->
+
+<!--						<div class=" form-group">-->
+<!--							<label>Date Of Birth</label>-->
+<!--							<input class="form-control" type="text" name="dateofbirth" th:field="*{dateofbirth}"-->
+<!--								   placeholder="Enter Date Of Birth" />-->
+<!--						</div>-->
+
+<!--						<div class=" form-group">-->
+<!--							<label>Mobileno</label>-->
+<!--							<input class="form-control" type="text" name="Mobileno" th:field="*{Mobileno}"-->
+<!--								   placeholder="Enter Mobile no" />-->
+<!--						</div>-->
+
+
+
+<!--						<div class=" form-group">-->
+<!--							<label>Enter Department</label>-->
+<!--							<input class="form-control" type="text" name="Department" th:field="*{Department}"-->
+<!--								   placeholder="Enter Department" />-->
+<!--						</div>-->
+
+<!--						<div class=" form-group">-->
+<!--							<label>Enter Regulation</label>-->
+<!--							<input class="form-control" type="text" name="Regulation" th:field="*{Regulation}"-->
+<!--								   placeholder="Enter Regulation" />-->
+<!--						</div>-->
+
+<!--						<br>-->
+<!--						<div class="box-footer">-->
+<!--							<button type="submit" class="btn btn-primary">Update</button>-->
+<!--						</div>-->
+
+<!--					</form>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</section>-->
+<!--</body>-->
+
+<!--</html>-->

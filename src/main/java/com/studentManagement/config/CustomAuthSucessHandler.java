@@ -28,7 +28,5 @@ public class CustomAuthSucessHandler implements AuthenticationSuccessHandler {
 		else if(roles.contains("ROLE_TEACHER")){
 			response.sendRedirect("/teacher/profile");
 		}
-
 	}
-
 }

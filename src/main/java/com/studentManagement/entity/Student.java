@@ -9,19 +9,20 @@ import java.util.List;
 
 @Entity
 @Table(name = "students")
-public class Student {
+public class Student
+{
 	@Id
 	@Column(name = "student_id")
 	private String id;
 
-	@Lob
-	@Column(name="image", nullable = false)
-	private Blob image;
-	
-	@Column(name = "first_name", nullable = false)
+//	@Lob
+//	@Column(name="image",nullable = true)
+//	private Blob image;
+
+	@Column(name = "first_name")
 	private String firstName;
 	
-	@Column(name = "last_name")
+	@Column(name = "last_name",unique = true)
 	private String lastName;
 	
 	@Column(name = "email", unique = true)
@@ -33,6 +34,16 @@ public class Student {
 	@Column(name= "teacher_id")
 	private String teacherId;
 
+	@Column(name="Date")
+	private String dateofbirth;
+
+	@Column(name="Mobile No")
+	private String Mobileno;
+
+	@Column(name="Department")
+	private String Department;
+	@Column(name = "Regulation")
+	private String Regulation;
 	@OneToMany(mappedBy = "student")
 	private List<first> first;
 
@@ -42,7 +53,6 @@ public class Student {
 	private List<third> third;
 	@OneToMany(mappedBy = "student3")
 	private List<fourth> fourth;
-
 	@OneToMany(mappedBy = "student4")
 	private List<fifth> fifth;
 	@OneToMany(mappedBy = "student5")
@@ -55,12 +65,11 @@ public class Student {
 	@OneToMany(mappedBy = "fees")
 	private List<Fees>  fees;
 
-	public Student() {
+	public Student()
+	{
+
 	}
-
-
-
-	public Student(String id, Blob image, String firstName, String lastName, String email, String teacherId, List<first> first,List<second> second,List<third> third,List<fourth> fourth,List<fifth> fifth,List<sixth> sixth,List<seventh> seventh,List<eighth> eighth, List<Fees> Fees)
+	public Student(String id, Blob image, String firstName, String lastName, String email, String teacherId,String dateofbirth,String Mobileno,String Department,String Regulation,List<first> first,List<second> second,List<third> third,List<fourth> fourth,List<fifth> fifth,List<sixth> sixth,List<seventh> seventh,List<eighth> eighth, List<Fees> Fees)
 	{
 		super();
 		this.id=id;
@@ -68,6 +77,8 @@ public class Student {
 		this.lastName = lastName;
 		this.email = email;
 		this.teacherId=teacherId;
+		this.dateofbirth=dateofbirth;
+		this.Mobileno=Mobileno;
 		this.first=first;
 		this.second=second;
 		this.third=third;
@@ -75,21 +86,20 @@ public class Student {
 		this.fifth=fifth;
 		this.seventh=seventh;
 		this.eighth=eighth;
-		this.image = image;
 		this.fees = fees;
 	}
 
-	public String getImageBase64() {
-		try {
-			if (image != null) {
-				byte[] imageBytes = image.getBytes(1, (int) image.length());
-				return Base64.getEncoder().encodeToString(imageBytes);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace(); // Handle the exception appropriately
-		}
-		return null;
-	}
+//	public String getImageBase64() {
+//		try {
+//			if (image != null) {
+//				byte[] imageBytes = image.getBytes(1, (int) image.length());
+//				return Base64.getEncoder().encodeToString(imageBytes);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace(); // Handle the exception appropriately
+//		}
+//		return null;
+//	}
 
 	public List<Fees> getFees() {
 		return fees;
@@ -205,11 +215,49 @@ public class Student {
 		this.password=password;
 	}
 
-	public Blob getImage() {
-		return image;
+//	public Blob getImage()
+//	{
+//		return image;
+//	}
+//	public void setImage(Blob[] image)
+//	{
+//		this.image = image;
+//	}
+	public String getDateofbirth()
+	{
+		return String.valueOf(dateofbirth);
 	}
 
-	public void setImage(Blob image) {
-		this.image = image;
+	public void setDateofbirth(String dateofbirth)
+	{
+		this.dateofbirth = dateofbirth;
+	}
+
+	public String getMobileno() {
+		return Mobileno;
+	}
+
+	public void setMobileno(String mobileno) {
+		this.Mobileno = Mobileno;
+	}
+
+	public String getDepartment()
+	{
+		return Department;
+	}
+
+	public void setDepartment(String department)
+	{
+		Department = department;
+	}
+
+	public String getRegulation()
+	{
+		return Regulation;
+	}
+
+	public void setRegulation(String regulation)
+	{
+		Regulation = regulation;
 	}
 }

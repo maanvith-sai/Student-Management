@@ -1,15 +1,11 @@
 package com.studentManagement.controller;
-
 import com.studentManagement.controller.semester.*;
-import com.studentManagement.entity.Student;
 import com.studentManagement.entity.Teacher;
 import com.studentManagement.entity.User;
-import com.studentManagement.entity.semester.*;
 import com.studentManagement.repository.TeacherRepository;
 import com.studentManagement.repository.UserRepo;
-import com.studentManagement.repository.semester.FirstSemesterInterface;
-import com.studentManagement.service.excelService.FirstExcelFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,11 +17,14 @@ import java.io.IOException;
 import java.security.Principal;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
 @RequestMapping("/teacher")
-public class TeacherController {
+public class TeacherController
+{
     @Autowired
     private UserRepo userRepo;
 
@@ -88,14 +87,14 @@ public class TeacherController {
         return "teacher_profile";
     }
 
-    @GetMapping("/display")
-    public ResponseEntity<byte[]> displayImage(@RequestParam("id") String id) throws IOException, SQLException
-    {
-        Teacher t = teacherRepository.findById(id).get();
-        byte [] imageBytes = t.getImage().getBytes(1,(int) t.getImage().length());
-        System.out.println(imageBytes.length);
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-    }
+//    @GetMapping("/display")
+//    public ResponseEntity<byte[]> displayImage(@RequestParam("id") String id) throws IOException, SQLException
+//    {
+//        Teacher t = teacherRepository.findById(id).get();
+//        byte [] imageBytes = t.getImage().getBytes(1,(int) t.getImage().length());
+//        System.out.println(imageBytes.length);
+//        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
+//    }
 
 
 
@@ -110,13 +109,11 @@ public class TeacherController {
     @GetMapping("/uploadFirst/form")
     public String firstshowUploadForm()
     {
-
         return first.showUploadForm();
     }
     @PostMapping("/uploadFirst/upload")
     public String firsthandleFileUpload(@RequestParam("file") MultipartFile file, Model model)
     {
-
         return first.handleFileUpload(file, model);
     }
     @GetMapping("/uploadFirst/all")
@@ -157,7 +154,6 @@ public class TeacherController {
     //
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 
     @GetMapping("/uploadThird/form")
@@ -256,8 +252,6 @@ public class TeacherController {
 
 
 
-
-
     //
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -321,7 +315,8 @@ public class TeacherController {
     }
 
     @PostMapping("/uploadFees/upload")
-    public String feeshhandleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
+    public String feeshhandleFileUpload(@RequestParam("file") MultipartFile file, Model model)
+    {
         return fees.handleFileUpload(file,model);
     }
 
@@ -330,6 +325,102 @@ public class TeacherController {
     {
         return fees.method2(value, model);
     }
+
+
+
+    @GetMapping("/uploadStudents/form")
+    public String StudentaddUploadForm()
+    {
+        return fees.showUploadForm1();
+    }
+
+    @PostMapping("/uploadStudents/upload")
+    public String StudentshhandleFileUpload(@RequestParam("file") MultipartFile file, Model model)
+    {
+        return fees.handleFileUpload1(file,model);
+    }
+
+//    @PostMapping("/post")
+//    public String method544(@RequestParam("file") MultipartFile file)
+//    {
+//     try (Workbook workbook = WorkbookFactory.create(file.getInputStream()))
+//     {
+//    Sheet sheet = workbook.getSheetAt(0);
+//
+//    // Iterate through rows and populate entities
+//    Iterator<Row> rowIterator = sheet.iterator();
+//    rowIterator.next();
+//    while (rowIterator.hasNext())
+//    {
+//        Row row = rowIterator.next();
+//        User entity = new User();
+//
+//        // Populate entity fields from row cells
+//        populateEntityFromRow(entity, row);
+//
+//        entities.add(entity);
+//    }
+//
+//    // Save entities to the database within a transaction
+//    fifthRepository.saveAll(entities);
+//
+//    return entities;
+//}
+//        catch (Exception e) {
+//    // Log the exception details
+//    e.printStackTrace();
+//
+//    // Rethrow or return an appropriate response
+//    throw new IOException("Error processing the Excel file.", e);
+//}
+//}
+//
+//    private void populateEntityFromRow(fifth entity, Row row)
+//    {
+//        String stdid=String.valueOf(getStringCellValue(row.getCell(0)));
+//        Student std=studentRepository.findById(stdid).orElseThrow(() -> new EntityNotFoundException("ParentEntity not found with id: " + stdid));
+//        entity.setId1(stdid);
+//        entity.setSubjectName(String.valueOf(getStringCellValue(row.getCell(1))));
+//        entity.setInternals(String.valueOf(getStringCellValue(row.getCell(2))));
+//        entity.setExternals(String.valueOf(getStringCellValue(row.getCell(3))));
+//        entity.setRegulation(String.valueOf(getStringCellValue(row.getCell(4))));
+//        entity.setAttendance(String.valueOf(getStringCellValue(row.getCell(5))));
+//        entity.setStudent4(std);
+//        std.getFifth().add(entity);
+//    }
+//    private String getStringCellValue(Cell cell) {
+//        if (cell == null) {
+//            return null;
+//        }
+//        switch (cell.getCellType())
+//        {
+//            case STRING:
+//                return cell.getStringCellValue();
+//            case NUMERIC:
+//                return String.valueOf(cell.getNumericCellValue());
+//            case BOOLEAN:
+//                return String.valueOf(cell.getBooleanCellValue());
+//            case FORMULA:
+//                // Handle formula cells if needed
+//                return cell.getCellFormula();
+//        }
+//        return null;
+//    }
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
 
 
 
