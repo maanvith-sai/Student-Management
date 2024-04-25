@@ -37,7 +37,8 @@ public class SeventhExcelFileServiceImpl implements SeventhExcelFileService {
 
         List<seventh> entities = new ArrayList<>();
 
-        try (Workbook workbook = WorkbookFactory.create(file.getInputStream())) {
+        try (Workbook workbook = WorkbookFactory.create(file.getInputStream()))
+        {
             Sheet sheet = workbook.getSheetAt(0);
 
             // Iterate through rows and populate entities
@@ -47,10 +48,8 @@ public class SeventhExcelFileServiceImpl implements SeventhExcelFileService {
             {
                 Row row = rowIterator.next();
                 seventh entity = new seventh();
-
                 // Populate entity fields from row cells
                 populateEntityFromRow(entity, row);
-
                 entities.add(entity);
             }
 

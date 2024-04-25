@@ -3,31 +3,25 @@ package com.studentManagement.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class User {
-
+public class User
+{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	@Column(unique = true)
 	private String name;
-
-
-
 	@Column(unique = true)
 	private String userId;
-
-
 	private String password;
 
-	public String getUserId() {
+	public String getUserId()
+	{
 		return userId;
 	}
-
-	public void setUserId(String userId) {
+	public void setUserId(String userId)
+	{
 		this.userId = userId;
 	}
-
 	private String role;
 
 	public int getId() {
@@ -46,7 +40,6 @@ public class User {
 		this.id = id;
 	}
 
-
 	public String getName() {
 		return name;
 	}
@@ -54,7 +47,6 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getPassword() {
 		return password;
@@ -65,8 +57,8 @@ public class User {
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "User [id=" + id + ", name=" + name + ", password=" + password + "]";
 	}
-
 }

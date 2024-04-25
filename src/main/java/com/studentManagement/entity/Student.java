@@ -237,7 +237,7 @@ public class Student
 		return Mobileno;
 	}
 
-	public void setMobileno(String mobileno) {
+	public void setMobileno(String Mobileno) {
 		this.Mobileno = Mobileno;
 	}
 

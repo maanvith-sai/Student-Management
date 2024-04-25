@@ -13,7 +13,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 
 
     @Modifying
-    @Query("DELETE FROM User u WHERE u.userId = :userId")
+    @Query("DELETE FROM User u WHERE u.userId = ?1")
     void deleteByUserId(String userId);
 
 }

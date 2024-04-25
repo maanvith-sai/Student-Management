@@ -6,95 +6,194 @@
 	<meta charset="ISO-8859-1">
 	<title>Students Management System</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-	<section class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">
-					Add New Student
-				</h1>
-				<div class="card-body">
-<!--					<form th:action="saveStudent" th:object="${student}" method="POST">-->
-					<form th:action="saveStudent" th:object="${student}" method="POST" enctype="multipart/form-data">
+<section class="container">
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+			<h1 class="text-center">
+				Add New Student
+			</h1>
+			<div class="card-body">
+				<!--					<form th:action="saveStudent" th:object="${student}" method="POST">-->
+				<form th:action="saveStudent" th:object="${student}" method="POST" enctype="multipart/form-data">
 
-<!--						<div class="form-group">-->
-<!--							<label>Student Photo</label>-->
-<!--							<input type="file" class="form-control" id="imageFile" name="imageFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload" required>-->
-<!--						</div>-->
+					<!--						<div class="form-group">-->
+					<!--							<label>Student Photo</label>-->
+					<!--							<input type="file" class="form-control" id="imageFile" name="imageFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload" required>-->
+					<!--						</div>-->
 
-						<div class="form-group">
-							<label>Student ID</label>
-							<input class="form-control" type="text" name="id" th:field="*{id}"
-								   placeholder="Enter student Id" />
-						</div>
+					<div class="form-group">
+						<label>Student ID</label>
+						<input class="form-control" type="text" name="id" th:field="*{id}"
+							   placeholder="Enter student Id" id ="studentId" onblur="handleFocusID()"/>
+						<label style="color: red;" id = "ids"></label>
+					</div>
 
-						<div class="form-group">
-							<label>First Name</label>
-							<input class="form-control" type="text" name="firstName" th:field="*{firstName}"
-								placeholder="Enter First Name" />
-						</div>
+					<div class="form-group">
+						<label>First Name</label>
+						<input class="form-control" type="text" name="firstName" th:field="*{firstName}"
+							   placeholder="Enter First Name" id="firstName" onblur="handleFocusName()"/>
+						<label style="color: red;" id = "name"></label>
+					</div>
 
-						<div class=" form-group">
-							<label>Last Name</label>
-							<input class="form-control" type="text" name="lastName" th:field="*{lastName}"
-								placeholder="Enter Last Name" />
-						</div>
+					<div class=" form-group">
+						<label>Last Name</label>
+						<input class="form-control" type="text" name="lastName" th:field="*{lastName}"
+							   placeholder="Enter Last Name" id="lastName"/>
+						<label style="color: red;" id = "last"></label>
+					</div>
 
-						<div class=" form-group">
-							<label>password</label>
-							<input class="form-control" type="password" name="password" th:field="*{password}"
-								   placeholder="Enter password"/>
-						</div>
+					<div class=" form-group">
+						<label>password</label>
+						<input class="form-control" type="password" name="password" th:field="*{password}"
+							   placeholder="Enter password" id="password" onblur="handleFocusPass()"/>
+						<label style="color: red;" id = "pass"></label>
+					</div>
 
-						<div class=" form-group">
-							<label>Email</label>
-							<input class="form-control" type="email" name="email" th:field="*{email}"
-								placeholder="Enter email" />
-						</div>
-						<div class="form-group">
-							<label>Teacher ID</label>
-							<input class="form-control" type="text" name="teacherId" th:field="*{teacherId}"
-								   placeholder="Enter Teacher ID" />
-						</div>
+					<div class=" form-group">
+						<label>Email</label>
+						<input class="form-control" type="email" name="email" th:field="*{email}"
+							   placeholder="Enter email" id="email" onblur="handleFocusMail()"/>
+						<label style="color: red;" id = "mail"></label>
+					</div>
+					<div class="form-group">
+						<label>Teacher ID</label>
+						<input class="form-control" type="text" name="teacherId" th:field="*{teacherId}"
+							   placeholder="Enter Teacher ID" id="teacherId" onblur="handleFocusTeacher()"/>
+						<label style="color: red;" id = "teacher"></label>
+					</div>
 
-						<div class=" form-group">
-							<label>Date Of Birth</label>
-							<input class="form-control" type="text" name="dateofbirth" th:field="*{dateofbirth}"
-								   placeholder="Enter Date Of Birth" />
-						</div>
+					<div class=" form-group">
+						<label>Date Of Birth</label>
+						<input class="form-control" type="text" name="dateofbirth" th:field="*{dateofbirth}"
+							   placeholder="Enter Date Of Birth" id="dateofbirth"/>
+						<label style="color: red;" id = "dob"></label>
+					</div>
 
-						<div class=" form-group">
-							<label>Mobileno</label>
-							<input class="form-control" type="text" name="Mobileno" th:field="*{Mobileno}"
-								   placeholder="Enter Mobile no" />
-						</div>
+					<div class=" form-group">
+						<label>Mobileno</label>
+						<input class="form-control" type="text" name="Mobileno" th:field="*{Mobileno}"
+							   placeholder="Enter Mobile no" id = mobileNumber onblur="handleFocusMobile()"/>
+						<label style="color: red;" id = "mobile"></label>
+					</div>
 
 
 
-						<div class=" form-group">
-							<label>Enter Department</label>
-							<input class="form-control" type="text" name="Department" th:field="*{Department}"
-								   placeholder="Enter Department" />
-						</div>
+					<div class=" form-group">
+						<label>Enter Department</label>
+						<input class="form-control" type="text" name="Department" th:field="*{Department}"
+							   placeholder="Enter Department" id="department" />
+						<label style="color: red;" id = "Dept"></label>
+					</div>
 
-						<div class=" form-group">
-							<label>Enter Regulation</label>
-							<input class="form-control" type="text" name="Regulation" th:field="*{Regulation}"
-								   placeholder="Enter Regulation" />
-						</div>
+					<div class=" form-group">
+						<label>Enter Regulation</label>
+						<input class="form-control" type="text" name="Regulation" th:field="*{Regulation}"
+							   placeholder="Enter Regulation" id="regulation" onblur="handleFocusReg()"/>
+						<label style="color: red;" id = "reg"></label>
+					</div>
 
-						<br>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-primary">Create</button>
-						</div>
-					</form>
-				</div>
+					<br>
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary">Create</button>
+					</div>
+				</form>
 			</div>
 		</div>
-	</section>
+	</div>
+	<script>
+		function handleFocusID() {
+            let inputElement = document.getElementById("studentId");
+            let reg = /^[a-zA-Z0-9]{10}$/;
+            let errorMessageElement = document.getElementById("ids");
+
+            if (!reg.test(inputElement.value)) {
+                errorMessageElement.innerText = "Invalid format. Please enter 10 alphanumeric characters.";
+                inputElement.style.border='1px solid red';
+            } else {
+                errorMessageElement.innerText = ""; // Clear the error message if input is valid
+                inputElement.style.border='1px solid #ced4da';
+            }
+        }
+
+        function handleFocusName() {
+            let inputElement = document.getElementById("firstName");
+            let reg = /^[a-zA-Z]{1,15}$/;
+            let errorMessageElement = document.getElementById("name");
+
+            if (!reg.test(inputElement.value)) {
+                errorMessageElement.innerText = "Invalid format. Please enter up to 15 alphabetic characters.";
+                inputElement.style.border='1px solid red';
+            } else {
+                errorMessageElement.innerText = ""; // Clear the error message if input is valid
+                inputElement.style.border='1px solid #ced4da';
+            }
+        }
+
+        function handleFocusPass() {
+			let inputElement = document.getElementById("password");
+			let reg = /^(?=.*[A-Z])(?=.*[@#])[^\s]{6,}$/; // Password should be at least 6 characters long, contain at least one uppercase letter, and contain at least one special character (@ or #)
+			let errorMessageElement = document.getElementById("pass");
+
+			if (!reg.test(inputElement.value)) {
+				errorMessageElement.innerText = "Password must be at least 6 characters long, contain at least one uppercase letter, and contain at least one special character (@ or #).";
+				inputElement.style.border='1px solid red';
+			} else {
+				errorMessageElement.innerText = ""; // Clear the error message if input is valid
+				inputElement.style.border='1px solid #ced4da';
+			}
+		}
+
+        function handleFocusMail() {
+            let inputElement = document.getElementById("email");
+            let reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            let errorMessageElement = document.getElementById("mail");
+
+            if (!reg.test(inputElement.value)) {
+                errorMessageElement.innerText = "Invalid email format.";
+                inputElement.style.border='1px solid red';
+            } else {
+                errorMessageElement.innerText = ""; // Clear the error message if input is valid
+                inputElement.style.border='1px solid #ced4da';
+            }
+        }
+
+        function handleFocusReg() {
+            let inputElement = document.getElementById("regulation");
+            let reg = /^R\d{2}$/;
+            let errorMessageElement = document.getElementById("reg");
+
+            if (!reg.test(inputElement.value)) {
+                errorMessageElement.innerText = "Invalid regulation format. Please enter in the format Rxx, where xx is a number.";
+                inputElement.style.border='1px solid red';
+            } else {
+                errorMessageElement.innerText = ""; // Clear the error message if input is valid
+                inputElement.style.border='1px solid #ced4da';
+            }
+        }
+
+        function handleFocusMobile() {
+            let inputElement = document.getElementById("mobileNumber");
+            let reg = /^\d{10}$/;
+            let errorMessageElement = document.getElementById("mobile");
+
+            if (!reg.test(inputElement.value)) {
+                errorMessageElement.innerText = "Invalid mobile number format. Please enter a 10-digit number.";
+                inputElement.style.border='1px solid red';
+            } else {
+                errorMessageElement.innerText = ""; // Clear the error message if input is valid
+                inputElement.style.border='1px solid #ced4da';
+            }
+        }
+
+
+
+	</script>
+
+</section>
 </body>
 
 </html>
